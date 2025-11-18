@@ -1,0 +1,32 @@
+# Maven target directory
+/target/
+
+# Maven build logs
+mvnw.cmd
+mvnw
+/.mvn/wrapper/maven-wrapper.jar
+
+
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+
+# VS Code
+.vscode/
+
+Thumbs.db
+
+# Logs
+*.log
+
+# Java
+*.class
+
+# Temporary files
+*.tmp
+*.swp
