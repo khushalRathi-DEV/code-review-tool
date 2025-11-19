@@ -37,4 +37,9 @@ public class Finding {
     public String getMessage() {
         return message;
     }
+    @Override
+    public String toString() {
+        return severity + " | " + filePath + ":" + line + " | " + tool + " | " + message;
+    }
+
 }
