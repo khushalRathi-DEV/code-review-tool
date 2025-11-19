@@ -44,6 +44,11 @@ public class CheckstyleRunner {
           String file = evt.getFileName();
           int line = evt.getLine();
           Severity severity = evt.getSeverityLevel() == SeverityLevel.ERROR ? Severity.ERROR : Severity.WARN; 
+        //   Severity severity = switch (evt.getSeverityLevel()) {
+        //     case ERROR -> Severity.ERROR;
+        //     case WARNING -> Severity.WARN;
+        //     default -> Severity.INFO; 
+        // };
           results.add(new Finding(file,line,severity,"checkstyle",evt.getMessage()));
         }
         @Override
@@ -52,9 +57,10 @@ public class CheckstyleRunner {
       
       List<File> files = FileCollector.collectJavaFiles(new File(projectPath));
 
+      // String[] fileNames = files.stream().map(f -> f.getAbsolutePath()).toArray(String[]::new);  // String[]::new string[] of same size as filesNames
 
-
-
+      checker.process(files);
+      checker.destroy();
 
       return results;
   }
