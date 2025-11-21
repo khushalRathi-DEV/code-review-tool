@@ -19,7 +19,7 @@ public class FileCollector {
       String name = dir.getName();
       if(name.equals("target") || name .equals(".git"))
         return;
-      File[] children = dir.listFiles();
+      File[] children = dir.listFiles();// Get all files/subdirs
       if(children == null)
         return;
       for(File child : children){
