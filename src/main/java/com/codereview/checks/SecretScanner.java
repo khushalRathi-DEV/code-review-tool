@@ -23,7 +23,8 @@ public class SecretScanner {
         List<File> files = FileCollector.collectJavaFiles(new File(ProjectPath));
 
         for(File f : files){
-            String content = Files.readString(f.toPath());
+            //String content = Files.readString(f.toPath());
+            String content = new String(Files.readAllBytes(f.toPath()), java.nio.charset.StandardCharsets.UTF_8);
             int lineNo = 1;
             String[] lines = content.split("\\R");
             for(String line : lines){
