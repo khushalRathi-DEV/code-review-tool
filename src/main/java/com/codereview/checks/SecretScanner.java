@@ -37,7 +37,7 @@ public class SecretScanner {
                 // entropy check for long strings
                 if (line.contains("\"")) {
                     for (String token : line.split("\"")) {
-                        if (token.length() > 40) {
+                        if (isPotentialSecretToken(token)) {
                             double ent = shannonEntropy(token);
                             if (ent > 4.0) {
                                 findings.add(new Finding(f.getAbsolutePath(), lineNo, Finding.Severity.WARN, "Secret",
@@ -50,6 +50,14 @@ public class SecretScanner {
             }
         }
         return findings;
+    }
+
+    private static boolean isPotentialSecretToken(String token) {
+        String trimmed = token.trim();
+        if (trimmed.length() < 40) {
+            return false;
+        }
+        return trimmed.matches("[A-Za-z0-9+/=_-]+");
     }
 
     private static double shannonEntropy(String s){

@@ -29,7 +29,13 @@ public class PMDRunner {
             LanguageVersion javaVersion = javaLanguage.getDefaultVersion();
             configuration.setDefaultLanguageVersion(javaVersion);
         }
-        configuration.addRuleSet(ruleset);
+        //configuration.addRuleSet(ruleset);
+        // Support multiple rule sets separated by commas
+        for (String rs : ruleset.split(",")) {
+            if (!rs.trim().isEmpty()) {
+                configuration.addRuleSet(rs.trim());
+            }
+        }
 
         // Create and run PMD analysis
         try (PmdAnalysis pmd = PmdAnalysis.create(configuration)) {

@@ -34,7 +34,15 @@ public class Main {
 
         String projectPath = "D:\\SpringBoot_Tutorials\\ecom-proj";
         String configPath = "src/main/resources/google_checks.xml";
-        String pmdRuleset = "category/java/bestpractices.xml";
+        //String pmdRuleset = "rulesets/java/quickstart.xml";
+        String pmdRuleset = String.join(",",
+                "category/java/bestpractices.xml",
+                "category/java/codestyle.xml",
+                "category/java/errorprone.xml",
+                "category/java/performance.xml",
+                "category/java/design.xml"
+        );
+
 
 //        System.out.println("=== Running Checkstyle ===");
 //        try {
@@ -93,6 +101,24 @@ public class Main {
         System.out.println("\n=== Analysis Results ===\n");
         ReportPrinter.print(findings);
 
+        String sanitizedProjectName = sanitizeProjectName(projectPath);
+        String reportOutputPath = "build/findings-report_" + sanitizedProjectName + ".txt";
+        try {
+            ReportPrinter.save(findings, reportOutputPath);
+            System.out.println("Findings saved to: " + new File(reportOutputPath).getAbsolutePath());
+        } catch (Exception e) {
+            System.err.println("Failed to save findings report: " + e.getMessage());
+        }
+
+    }
+
+    private static String sanitizeProjectName(String projectPath) {
+        String projectName = new File(projectPath).getName();
+        if (projectName == null || projectName.trim().isEmpty()
+        ) {
+            projectName = "project";
+        }
+        return projectName.replaceAll("[^a-zA-Z0-9._-]", "_");
     }
 }
 
