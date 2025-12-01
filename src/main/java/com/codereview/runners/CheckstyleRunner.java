@@ -43,7 +43,9 @@ public class CheckstyleRunner {
         public void addError(AuditEvent evt){
           String file = evt.getFileName();
           int line = evt.getLine();
-          Severity severity = evt.getSeverityLevel() == SeverityLevel.ERROR ? Severity.ERROR : Severity.WARN; 
+            String message = evt.getMessage();
+          //Severity severity = evt.getSeverityLevel() == SeverityLevel.ERROR ? Severity.ERROR : Severity.WARN;
+            Severity severity = com.codereview.util.SeverityMapper.forCheckstyle(message);
         //   Severity severity = switch (evt.getSeverityLevel()) {
         //     case ERROR -> Severity.ERROR;
         //     case WARNING -> Severity.WARN;

@@ -33,3 +33,5 @@ Thumbs.db
 
 demo.txt
 build
+CheckStyle_demo.xml
+PmdRuleset.xml

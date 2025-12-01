@@ -25,7 +25,7 @@ public class TestFileChecker {
             File expected = new File(testSrc,expectedTest);
 
             if(!expected.exists()){
-                findings.add(new Finding(f.getAbsolutePath(),0, Finding.Severity.WARN,"TestCheck","Missing test file (expected: " + expected.getPath() + ")"));
+                findings.add(new Finding(f.getAbsolutePath(),0, com.codereview.util.SeverityMapper.forMissingTest(),"TestCheck","Missing test file (expected: " + expected.getPath() + ")"));
             }
         }
         return findings;

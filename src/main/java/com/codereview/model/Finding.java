@@ -1,7 +1,14 @@
 package com.codereview.model;
 
 public class Finding {
-    public enum Severity {ERROR,WARN,INFO};
+    public enum Severity {
+        INFO,
+        LOW,
+        MEDIUM,
+        HIGH,
+        CRITICAL
+    }
+
 
     private final String filePath;
     private final int line;

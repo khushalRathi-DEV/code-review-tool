@@ -49,15 +49,17 @@ public class PMDRunner {
                 
                 // Map PMD priority to Finding severity
                 // PMD priority: 1-2 = ERROR, 3-4 = WARN, 5 = INFO
-                Severity severity;
+//                Severity severity;
                 int priority = violation.getRule().getPriority().getPriority();
-                if (priority <= 2) {
-                    severity = Severity.ERROR;
-                } else if (priority <= 4) {
-                    severity = Severity.WARN;
-                } else {
-                    severity = Severity.INFO;
-                }
+                Severity severity = com.codereview.util.SeverityMapper.forPMD(priority);
+
+//                if (priority <= 2) {
+//                    severity = Severity.ERROR;
+//                } else if (priority <= 4) {
+//                    severity = Severity.WARN;
+//                } else {
+//                    severity = Severity.INFO;
+//                }
                 
                 findings.add(new Finding(filePath, line, severity, "pmd", message));
             }
